@@ -1,0 +1,67 @@
+{
+  "@@locale": "en",
+  "homeNavBtn": "Home",
+  "@homeNavBtn": {
+    "description": ""
+  },
+  "inviteNavBtn": "Invite",
+  "@inviteNavBtn": {
+    "description": ""
+  },
+  "searchNavBtn": "Search",
+  "@inviteNavBtn": {
+    "description": ""
+  },
+  "memberNavBtn": "Member",
+  "@inviteNavBtn": {
+    "description": ""
+  },
+  "directInvite": "Invite Immediately",
+  "@directInvite": {
+    "description": ""
+  },
+  "memberInfo": "Member Info",
+  "@memberInfo": {
+    "description": ""
+  },
+  "resetPassword": "Reset password",
+  "@resetPassword": {
+    "description": ""
+  },
+  "myCoupon": "My coupon",
+  "@myCoupon": {
+    "description": ""
+  },
+  "myPremium": "My premium",
+  "@myPremium": {
+    "description": ""
+  },
+  "logout": "Logout",
+  "@logout": {
+    "description": ""
+  },
+  "inviteList": "Invite List",
+  "@inviteList": {
+    "description": ""
+  },
+  "invitee": "Invitee",
+  "@invitee": {
+    "description": ""
+  },
+  "selectedInvitee": "Selected",
+  "@selectedInvitee": {
+    "description": ""
+  },
+  "smsSent": "Messages have been sent",
+  "@smsSent": {
+    "description": ""
+  },
+  "smsNotSent": "Messages haven't be sent",
+  "@smsNotSent": {
+    "description": ""
+  },
+  "inviteDescription": "",
+  "@inviteDescription": {
+    "description": ""
+  }
+}
