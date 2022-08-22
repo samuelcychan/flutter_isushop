@@ -94,6 +94,12 @@ class _webviewState extends State<WebviewPage> {
                         token = cookie?.value?.toString() ?? "";
                       });
                     },
+                    androidOnGeolocationPermissionsShowPrompt:
+                        (InAppWebViewController controller,
+                            String origin) async {
+                      return GeolocationPermissionShowPromptResponse(
+                          origin: origin, allow: true, retain: true);
+                    },
                   ),
                   Visibility(
                       visible: shouldShowSearchBar,
