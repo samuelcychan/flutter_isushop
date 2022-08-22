@@ -18,6 +18,7 @@ class _webviewState extends State<WebviewPage> {
   String fcmToken = "";
   bool shouldShowBottomNav = false;
   bool shouldShowSearchBar = false;
+  bool shouldShowFAB = false;
 
   TextEditingController textFieldController = TextEditingController();
   InAppWebViewController? webViewController;
@@ -92,6 +93,7 @@ class _webviewState extends State<WebviewPage> {
                       } else {
                         shouldShowBottomNav = true;
                       }
+                      shouldShowFAB = !checkIsuDomain(url.toString());
                       CookieManager manager = CookieManager.instance();
                       Cookie? cookie = await manager.getCookie(
                           url: Uri.parse("https://portal.isu-shop.com/"),
@@ -142,6 +144,16 @@ class _webviewState extends State<WebviewPage> {
               }),
             )
           : null,
+      floatingActionButton: (shouldShowFAB)
+          ? FloatingActionButton(
+              onPressed: () {
+                webViewController?.goBack();
+              },
+              backgroundColor: Colors.black,
+              child: const Icon(Icons.arrow_back),
+            )
+          : null,
+      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
     );
   }
 
@@ -153,5 +165,9 @@ class _webviewState extends State<WebviewPage> {
     if (status == PermissionStatus.permanentlyDenied) {
       openAppSettings();
     }
+  }
+
+  bool checkIsuDomain(String url) {
+    return url.contains(baseUriPath);
   }
 }
