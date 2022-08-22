@@ -3,6 +3,7 @@ import 'package:cbsdinfo_isu_shop/widget/bottom_nav.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class WebviewPage extends StatefulWidget {
   const WebviewPage({Key? key}) : super(key: key);
@@ -30,6 +31,11 @@ class _webviewState extends State<WebviewPage> {
       ios: IOSInAppWebViewOptions(
         allowsInlineMediaPlayback: true,
       ));
+  @override
+  void initState() {
+    super.initState();
+    checkGeolocationPermission();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -137,5 +143,15 @@ class _webviewState extends State<WebviewPage> {
             )
           : null,
     );
+  }
+
+  void checkGeolocationPermission() async {
+    await [
+      Permission.locationWhenInUse,
+    ].request();
+    final status = await Permission.locationWhenInUse.status;
+    if (status == PermissionStatus.permanentlyDenied) {
+      openAppSettings();
+    }
   }
 }
