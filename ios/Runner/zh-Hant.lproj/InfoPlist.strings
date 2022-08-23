@@ -1,0 +1,5 @@
+"CFBundleDisplayName" = "愛嬉遊";
+"CFBundleName" = "愛嬉遊";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "要查找附近的推薦，請允許訪問您的位置";
+"NSLocationAlwaysUsageDescription" = "要查找附近的推薦，請允許訪問您的位置";
+"NSLocationWhenInUseUsageDescription" = "要查找附近的推薦，請允許訪問您的位置";

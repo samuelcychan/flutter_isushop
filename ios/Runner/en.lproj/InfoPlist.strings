@@ -1,0 +1,5 @@
+"CFBundleDisplayName" = "I see you";
+"CFBundleName" = "I see you";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "To find nearby recommendation, please allow the access of your location";
+"NSLocationAlwaysUsageDescription" = "To find nearby recommendation, please allow the access of your location";
+"NSLocationWhenInUseUsageDescription" = "To find nearby recommendation, please allow the access of your location";
