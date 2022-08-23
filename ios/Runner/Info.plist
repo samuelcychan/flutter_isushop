@@ -31,14 +31,16 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>To take a image with camera, please allow the permission of using camera</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Reason we need access to the contact list</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Reason why app needs location</string>
+	<string>To find nearby recommendation, please allow the access of your location</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Reason why app needs location</string>
+	<string>To find nearby recommendation, please allow the access of your location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Reason why app needs location</string>
+	<string>To find nearby recommendation, please allow the access of your location</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

@@ -3,3 +3,4 @@
 "NSLocationAlwaysAndWhenInUseUsageDescription" = "要查找附近的推薦，請允許訪問您的位置";
 "NSLocationAlwaysUsageDescription" = "要查找附近的推薦，請允許訪問您的位置";
 "NSLocationWhenInUseUsageDescription" = "要查找附近的推薦，請允許訪問您的位置";
+"NSCameraUsageDescription" = "要使用相機拍照，請允許使用相機";
