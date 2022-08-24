@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:cbsdinfo_isu_shop/widget/webview_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 import 'firebase_options.dart';
 
@@ -26,6 +29,9 @@ Future<void> main() async {
     provisional: false,
     sound: true,
   );
+  if (Platform.isAndroid) {
+    AndroidInAppWebViewController.setWebContentsDebuggingEnabled(true);
+  }
   runApp(const MyApp());
 }
 
