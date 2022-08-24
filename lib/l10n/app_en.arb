@@ -52,16 +52,16 @@
   "@selectedInvitee": {
     "description": ""
   },
-  "smsSent": "Messages have been sent",
+  "smsSent": "Invitation message sent",
   "@smsSent": {
     "description": ""
   },
-  "smsNotSent": "Messages haven't be sent",
+  "smsNotSent": "Invitation message delivery failed",
   "@smsNotSent": {
     "description": ""
   },
   "inviteDescription": "",
   "@inviteDescription": {
-    "description": ""
+    "description": "<span style='font-size: 14px; color: #555555;'>邀請3位好友即可以獲得「住宿8折」券</span><br><span style='font-size: 14px; color: #555555;'>已獲得</span><span style='font-size: 18px; color: #2A52B8;'> 1張 </span><span style='font-size: 14px; color: #555555; font-weight: bold;'>8折住宿優惠券</span><br><span style='font-size: 12px; color: #BEBEBE;'>已獲得的優惠券可到「會員專區」我的優惠券」中查看</span>"
   }
 }
