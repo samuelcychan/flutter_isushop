@@ -46,112 +46,131 @@ class _webviewState extends State<WebviewPage> {
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      body: SafeArea(
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: <
-              Widget>[
-        Expanded(
-          child: Stack(
-            children: [
-              InAppWebView(
-                key: webviewKey,
-                initialUrlRequest: URLRequest(
-                    url: Uri.parse("$baseUriPath${obj?['path'] ?? ''}")),
-                initialOptions: options,
-                onWebViewCreated: (controller) async {
-                  fcmToken = await FirebaseMessaging.instance.getToken() ?? "";
-                  final expiresDate = DateTime.now()
-                      .add(const Duration(days: 1))
-                      .millisecondsSinceEpoch;
-                  CookieManager manager = CookieManager.instance();
-                  if (fcmToken.isNotEmpty) {
-                    print(fcmToken);
-                    await manager.setCookie(
-                      url: Uri.parse(baseUriPath),
-                      name: "deviceToken",
-                      value: fcmToken,
-                      domain: "portal.isu-shop.com",
-                      expiresDate: expiresDate,
-                      isSecure: false,
-                    );
-                  }
-                  await manager.setCookie(
-                    url: Uri.parse(baseUriPath),
-                    name: "isHidden",
-                    value: "1",
-                    domain: "portal.isu-shop.com",
-                    expiresDate: expiresDate,
-                    isSecure: false,
-                  );
-                  webViewController = controller;
-                },
-                onUpdateVisitedHistory:
-                    (controller, url, androidIsReload) async {
-                  if (url.toString().contains("login") ||
-                      url.toString().contains("logout")) {
-                    shouldShowBottomNav = false;
-                  } else {
-                    shouldShowBottomNav = true;
-                  }
-                  shouldShowFAB = !checkIsuDomain(url.toString());
-                  CookieManager manager = CookieManager.instance();
-                  Cookie? cookie = await manager.getCookie(
-                      url: Uri.parse("https://portal.isu-shop.com/"),
-                      name: "Authorization");
-                  setState(() {
-                    token = cookie?.value?.toString() ?? "";
-                  });
-                },
-                androidOnGeolocationPermissionsShowPrompt:
-                    (InAppWebViewController controller, String origin) async {
-                  return GeolocationPermissionShowPromptResponse(
-                      origin: origin, allow: true, retain: true);
-                },
-                shouldOverrideUrlLoading: (controller, navigationAction) async {
-                  var uri = navigationAction.request.url;
-                  if (uri?.scheme.startsWith("mailto") ?? false) {
-                    if (uri != null) {
-                      Share.share(uri.queryParameters["body"].toString(),
-                          subject: uri.queryParameters["subject"].toString());
-                      return NavigationActionPolicy.CANCEL;
-                    } else {
-                      return NavigationActionPolicy.ALLOW;
-                    }
-                  }
-                },
-              ),
-              Visibility(
-                  visible: shouldShowSearchBar,
-                  child: Positioned(
-                      bottom: 0,
-                      child: Container(
-                          color: Colors.white,
-                          width: MediaQuery.of(context).size.width,
-                          child: TextField(
-                            controller: textFieldController,
-                            decoration: InputDecoration(
-                                suffixIcon: IconButton(
-                              icon: const Icon(Icons.search),
-                              onPressed: () {
-                                //Navigator.of(context).pop();
-                                Navigator.of(context).pushNamed('/webview',
-                                    arguments: {
-                                      'token': token,
-                                      'path':
-                                          '/search?key=${textFieldController.text}'
-                                    });
-                              },
-                            )),
-                          )))),
-            ],
-          ),
-        ),
-      ])),
+      body: WillPopScope(
+          onWillPop: () async {
+            if ((await webViewController?.canGoBack()) ?? false) {
+              webViewController!.goBack();
+              return false;
+            }
+            if (Navigator.of(context).canPop()) {
+              Navigator.of(context).pop();
+              return false;
+            }
+            return true;
+          },
+          child: SafeArea(
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                Expanded(
+                  child: Stack(
+                    children: [
+                      InAppWebView(
+                        key: webviewKey,
+                        initialUrlRequest: URLRequest(
+                            url:
+                                Uri.parse("$baseUriPath${obj?['path'] ?? ''}")),
+                        initialOptions: options,
+                        onWebViewCreated: (controller) async {
+                          fcmToken =
+                              await FirebaseMessaging.instance.getToken() ?? "";
+                          final expiresDate = DateTime.now()
+                              .add(const Duration(days: 1))
+                              .millisecondsSinceEpoch;
+                          CookieManager manager = CookieManager.instance();
+                          if (fcmToken.isNotEmpty) {
+                            print(fcmToken);
+                            await manager.setCookie(
+                              url: Uri.parse(baseUriPath),
+                              name: "deviceToken",
+                              value: fcmToken,
+                              domain: "portal.isu-shop.com",
+                              expiresDate: expiresDate,
+                              isSecure: false,
+                            );
+                          }
+                          await manager.setCookie(
+                            url: Uri.parse(baseUriPath),
+                            name: "isHidden",
+                            value: "1",
+                            domain: "portal.isu-shop.com",
+                            expiresDate: expiresDate,
+                            isSecure: false,
+                          );
+                          webViewController = controller;
+                        },
+                        onUpdateVisitedHistory:
+                            (controller, url, androidIsReload) async {
+                          if (url.toString().contains("login") ||
+                              url.toString().contains("logout")) {
+                            shouldShowBottomNav = false;
+                          } else {
+                            shouldShowBottomNav = true;
+                          }
+                          shouldShowFAB = !checkIsuDomain(url.toString());
+                          CookieManager manager = CookieManager.instance();
+                          Cookie? cookie = await manager.getCookie(
+                              url: Uri.parse("https://portal.isu-shop.com/"),
+                              name: "Authorization");
+                          setState(() {
+                            token = cookie?.value?.toString() ?? "";
+                          });
+                        },
+                        androidOnGeolocationPermissionsShowPrompt:
+                            (InAppWebViewController controller,
+                                String origin) async {
+                          return GeolocationPermissionShowPromptResponse(
+                              origin: origin, allow: true, retain: true);
+                        },
+                        shouldOverrideUrlLoading:
+                            (controller, navigationAction) async {
+                          var uri = navigationAction.request.url;
+                          if (uri?.scheme.startsWith("mailto") ?? false) {
+                            if (uri != null) {
+                              Share.share(
+                                  uri.queryParameters["body"].toString(),
+                                  subject: uri.queryParameters["subject"]
+                                      .toString());
+                              return NavigationActionPolicy.CANCEL;
+                            } else {
+                              return NavigationActionPolicy.ALLOW;
+                            }
+                          }
+                        },
+                      ),
+                      Visibility(
+                          visible: shouldShowSearchBar,
+                          child: Positioned(
+                              bottom: 0,
+                              child: Container(
+                                  color: Colors.white,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: TextField(
+                                    controller: textFieldController,
+                                    decoration: InputDecoration(
+                                        suffixIcon: IconButton(
+                                      icon: const Icon(Icons.search),
+                                      onPressed: () {
+                                        Navigator.of(context)
+                                            .pushNamed('/webview', arguments: {
+                                          'token': token,
+                                          'path':
+                                              '/search?key=${textFieldController.text}'
+                                        });
+                                      },
+                                    )),
+                                  )))),
+                    ],
+                  ),
+                ),
+              ]))),
       bottomNavigationBar: (token?.isNotEmpty ?? false) && shouldShowBottomNav
           ? BottomNavBar(
               token: token,
               callback: (val) => setState(() {
                 shouldShowSearchBar = val;
               }),
+              controller: webViewController,
             )
           : null,
       floatingActionButton: (shouldShowFAB)

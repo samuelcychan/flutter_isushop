@@ -2,13 +2,16 @@ import 'package:cbsdinfo_isu_shop/invite.dart';
 import 'package:cbsdinfo_isu_shop/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({Key? key, required this.token, required this.callback})
+  const BottomNavBar(
+      {Key? key, required this.token, required this.callback, this.controller})
       : super(key: key);
 
   final String? token;
   final VoidBoolCallback callback;
+  final InAppWebViewController? controller;
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
@@ -35,7 +38,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
         setState(() {
           _currentIndex = index;
           if (index == 0) {
-            Navigator.of(context).pushNamed('/', arguments: {"path": "/"});
+            // Navigator.of(context).pushNamed('/', arguments: {"path": "/"});
+            widget.controller
+                ?.loadUrl(urlRequest: URLRequest(url: Uri.parse(baseUriPath)));
           }
           if (index == 1) {
             Navigator.push(
@@ -99,34 +104,48 @@ class _BottomNavBarState extends State<BottomNavBar> {
       switch (value) {
         case "member_info":
           {
-            Navigator.of(context).pushNamed('/webview',
-                arguments: {'token': widget.token, 'path': '/member/info'});
+            // Navigator.of(context).pushNamed('/webview',
+            //     arguments: {'token': widget.token, 'path': '/member/info'});
+            widget.controller?.loadUrl(
+                urlRequest:
+                    URLRequest(url: Uri.parse("$baseUriPath/member/info")));
           }
           break;
         case "reset_password":
           {
-            Navigator.of(context).pushNamed('/webview', arguments: {
-              'token': widget.token,
-              'path': '/member/resetPassword'
-            });
+            // Navigator.of(context).pushNamed('/webview', arguments: {
+            //   'token': widget.token,
+            //   'path': '/member/resetPassword'
+            // });
+            widget.controller?.loadUrl(
+                urlRequest: URLRequest(
+                    url: Uri.parse("$baseUriPath/member/resetPassword")));
           }
           break;
         case "my_coupon":
           {
-            Navigator.of(context).pushNamed('/webview',
-                arguments: {'token': widget.token, 'path': '/member/coupon'});
+            // Navigator.of(context).pushNamed('/webview',
+            //     arguments: {'token': widget.token, 'path': '/member/coupon'});
+            widget.controller?.loadUrl(
+                urlRequest:
+                    URLRequest(url: Uri.parse("$baseUriPath/member/coupon")));
           }
           break;
         case "my_premium":
           {
-            Navigator.of(context).pushNamed('/webview',
-                arguments: {'token': widget.token, 'path': '/member/rules'});
+            // Navigator.of(context).pushNamed('/webview',
+            //     arguments: {'token': widget.token, 'path': '/member/rules'});
+            widget.controller?.loadUrl(
+                urlRequest:
+                    URLRequest(url: Uri.parse("$baseUriPath/member/rules")));
           }
           break;
         case "logout":
           {
-            Navigator.of(context).pushNamed('/webview',
-                arguments: {'token': widget.token, 'path': '/logout'});
+            // Navigator.of(context).pushNamed('/webview',
+            //     arguments: {'token': widget.token, 'path': '/logout'});
+            widget.controller?.loadUrl(
+                urlRequest: URLRequest(url: Uri.parse("$baseUriPath/logout")));
           }
           break;
         default:
