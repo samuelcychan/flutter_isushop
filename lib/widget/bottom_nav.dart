@@ -39,15 +39,24 @@ class _BottomNavBarState extends State<BottomNavBar> {
           _currentIndex = index;
           if (index == 0) {
             // Navigator.of(context).pushNamed('/', arguments: {"path": "/"});
+            if (ModalRoute.of(context)?.settings.name != "/" &&
+                ModalRoute.of(context)?.settings.name != "/webview") {
+              Navigator.of(context).pop();
+            }
             widget.controller
                 ?.loadUrl(urlRequest: URLRequest(url: Uri.parse(baseUriPath)));
           }
           if (index == 1) {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        InvitePage(token: widget.token ?? "")));
+            if (ModalRoute.of(context)?.settings.name != "/invite") {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => InvitePage(
+                            token: widget.token ?? "",
+                            controller: widget.controller,
+                          ),
+                      settings: const RouteSettings(name: "/invite")));
+            }
           }
           if (index == 2) {
             shouldShowSearchBar = !shouldShowSearchBar;
@@ -101,6 +110,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
       ],
     ).then((value) {
       if (value == null) return;
+      if (ModalRoute.of(context)?.settings.name != "/" &&
+          ModalRoute.of(context)?.settings.name != "/webview") {
+        Navigator.of(context).pop();
+      }
       switch (value) {
         case "member_info":
           {

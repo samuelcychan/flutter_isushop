@@ -10,10 +10,10 @@ class WebviewPage extends StatefulWidget {
   const WebviewPage({Key? key}) : super(key: key);
 
   @override
-  State<WebviewPage> createState() => _webviewState();
+  State<WebviewPage> createState() => _WebviewState();
 }
 
-class _webviewState extends State<WebviewPage> {
+class _WebviewState extends State<WebviewPage> {
   final GlobalKey webviewKey = GlobalKey();
   String? token = "";
   String fcmToken = "";
@@ -79,7 +79,7 @@ class _webviewState extends State<WebviewPage> {
                               .millisecondsSinceEpoch;
                           CookieManager manager = CookieManager.instance();
                           if (fcmToken.isNotEmpty) {
-                            print(fcmToken);
+                            debugPrint(fcmToken);
                             await manager.setCookie(
                               url: Uri.parse(baseUriPath),
                               name: "deviceToken",
@@ -132,10 +132,9 @@ class _webviewState extends State<WebviewPage> {
                                   subject: uri.queryParameters["subject"]
                                       .toString());
                               return NavigationActionPolicy.CANCEL;
-                            } else {
-                              return NavigationActionPolicy.ALLOW;
                             }
                           }
+                          return NavigationActionPolicy.ALLOW;
                         },
                       ),
                       Visibility(
@@ -174,13 +173,15 @@ class _webviewState extends State<WebviewPage> {
             )
           : null,
       floatingActionButton: (shouldShowFAB)
-          ? FloatingActionButton(
-              onPressed: () {
-                webViewController?.goBack();
-              },
-              backgroundColor: Colors.black,
-              child: const Icon(Icons.arrow_back),
-            )
+          ? Padding(
+              padding: const EdgeInsets.only(top: 12.0),
+              child: FloatingActionButton(
+                onPressed: () {
+                  webViewController?.goBack();
+                },
+                backgroundColor: ceruleanBlueColor,
+                child: const Icon(Icons.arrow_back),
+              ))
           : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
     );

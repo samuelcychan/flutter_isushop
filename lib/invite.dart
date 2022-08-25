@@ -7,14 +7,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:http/http.dart' as http;
 
 const smsBody = "test";
 
 class InvitePage extends StatefulWidget {
-  const InvitePage({Key? key, required this.token}) : super(key: key);
+  const InvitePage({Key? key, required this.token, this.controller})
+      : super(key: key);
 
   final String token;
+  final InAppWebViewController? controller;
 
   @override
   State<InvitePage> createState() => _ShareState();
@@ -73,6 +76,7 @@ class _ShareState extends State<InvitePage> {
           callback: (val) => setState(() {
             shouldShowSearchBar = val;
           }),
+          controller: widget.controller,
         ),
       ),
     ]);
@@ -163,7 +167,8 @@ class _ShareState extends State<InvitePage> {
                             },
                             body: json.encode({
                               'telephone': (key as Contact).phones.first.number,
-                              'smsMessage': smsBody,
+                              'smsMessage': AppLocalizations.of(context)
+                                  ?.inviteDescription,
                             }),
                           );
                           if (response.statusCode != 200) {
