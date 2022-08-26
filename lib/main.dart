@@ -21,13 +21,11 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseMessaging.instance.requestPermission();
-  if (Platform.isAndroid) {
-    AndroidInAppWebViewController.setWebContentsDebuggingEnabled(true);
-    SystemUiOverlayStyle style = const SystemUiOverlayStyle(
-      statusBarColor: ceruleanBlueColor,
-    );
-    SystemChrome.setSystemUIOverlayStyle(style);
-  }
+  AndroidInAppWebViewController.setWebContentsDebuggingEnabled(true);
+  SystemUiOverlayStyle style = const SystemUiOverlayStyle(
+    statusBarColor: ceruleanBlueColor,
+  );
+  SystemChrome.setSystemUIOverlayStyle(style);
   runApp(const MyApp());
 }
 

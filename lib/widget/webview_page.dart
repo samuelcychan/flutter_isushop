@@ -45,6 +45,10 @@ class _WebviewState extends State<WebviewPage> {
     token ??= obj?["token"];
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: ceruleanBlueColor,
+        toolbarHeight: 0,
+      ),
       resizeToAvoidBottomInset: true,
       body: WillPopScope(
           onWillPop: () async {
