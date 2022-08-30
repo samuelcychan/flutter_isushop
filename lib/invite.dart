@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:cbsdinfo_isu_shop/main.dart';
 import 'package:cbsdinfo_isu_shop/widget/bottom_nav.dart';
+import 'package:cbsdinfo_isu_shop/widget/search_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -189,26 +190,9 @@ class _ShareState extends State<InvitePage> {
           ]),
           Visibility(
               visible: shouldShowSearchBar,
-              child: Positioned(
-                  bottom: 0,
-                  child: Container(
-                      color: Colors.white,
-                      width: MediaQuery.of(context).size.width,
-                      child: TextField(
-                        controller: textFieldController,
-                        decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                          icon: const Icon(Icons.search),
-                          onPressed: () {
-                            //Navigator.of(context).pop();
-                            Navigator.of(context)
-                                .pushNamed('/webview', arguments: {
-                              'token': widget.token,
-                              'path': '/search?key=${textFieldController.text}'
-                            });
-                          },
-                        )),
-                      )))),
+              child: SearchBox(
+                webviewController: widget.controller,
+              )),
         ],
       ),
     );

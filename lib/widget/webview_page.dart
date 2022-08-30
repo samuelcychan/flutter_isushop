@@ -1,5 +1,6 @@
 import 'package:cbsdinfo_isu_shop/main.dart';
 import 'package:cbsdinfo_isu_shop/widget/bottom_nav.dart';
+import 'package:cbsdinfo_isu_shop/widget/search_box.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -143,26 +144,9 @@ class _WebviewState extends State<WebviewPage> {
                       ),
                       Visibility(
                           visible: shouldShowSearchBar,
-                          child: Positioned(
-                              bottom: 0,
-                              child: Container(
-                                  color: Colors.white,
-                                  width: MediaQuery.of(context).size.width,
-                                  child: TextField(
-                                    controller: textFieldController,
-                                    decoration: InputDecoration(
-                                        suffixIcon: IconButton(
-                                      icon: const Icon(Icons.search),
-                                      onPressed: () {
-                                        Navigator.of(context)
-                                            .pushNamed('/webview', arguments: {
-                                          'token': token,
-                                          'path':
-                                              '/search?key=${textFieldController.text}'
-                                        });
-                                      },
-                                    )),
-                                  )))),
+                          child: SearchBox(
+                            webviewController: webViewController,
+                          )),
                     ],
                   ),
                 ),

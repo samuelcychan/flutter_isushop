@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:cbsdinfo_isu_shop/widget/webview_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
