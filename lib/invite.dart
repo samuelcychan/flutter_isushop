@@ -28,6 +28,8 @@ class _ShareState extends State<InvitePage> {
   List<Contact>? contacts;
   Map<Contact, bool> selectedItem = {};
   bool shouldShowSearchBar = false;
+  AppLocalizations? appLocalizations;
+  ScaffoldMessengerState? scaffoldMessengerState;
   final textFieldController = TextEditingController();
 
   @override
@@ -47,6 +49,8 @@ class _ShareState extends State<InvitePage> {
 
   @override
   Widget build(BuildContext context) {
+    appLocalizations = AppLocalizations.of(context);
+    scaffoldMessengerState = ScaffoldMessenger.of(context);
     return Stack(children: <Widget>[
       Container(
         decoration: const BoxDecoration(
@@ -98,7 +102,7 @@ class _ShareState extends State<InvitePage> {
                 ),
               ),
               child: Html(
-                data: AppLocalizations.of(context)?.inviteDescription,
+                data: appLocalizations?.inviteDescription,
               ),
             ),
             Expanded(
@@ -119,8 +123,8 @@ class _ShareState extends State<InvitePage> {
                           children: [
                             Padding(
                                 padding: const EdgeInsets.only(top: 9.0),
-                                child: Text(
-                                    AppLocalizations.of(context)!.inviteList)),
+                                child:
+                                    Text(appLocalizations?.inviteList ?? "")),
                             Padding(
                                 padding: const EdgeInsets.only(
                                     left: 12.0, right: 12.0),
@@ -128,9 +132,9 @@ class _ShareState extends State<InvitePage> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(AppLocalizations.of(context)!.invitee),
+                                    Text(appLocalizations?.invitee ?? ""),
                                     Text(
-                                        "${selectedItem.entries.length}/${contacts?.length ?? 0} ${AppLocalizations.of(context)!.selectedInvitee}")
+                                        "${selectedItem.entries.length}/${contacts?.length ?? 0} ${appLocalizations?.selectedInvitee}")
                                   ],
                                 )),
                             const Divider(),
@@ -153,11 +157,9 @@ class _ShareState extends State<InvitePage> {
                     width: double.infinity,
                     child: ElevatedButton.icon(
                       icon: Image.asset("assets/images/icons/isu_invite.png"),
-                      label: Text(
-                          AppLocalizations.of(context)?.directInvite ?? ""),
+                      label: Text(appLocalizations?.directInvite ?? ""),
                       onPressed: () async {
-                        String notifyMsg =
-                            AppLocalizations.of(context)!.smsSent;
+                        String notifyMsg = appLocalizations?.smsSent ?? "";
                         await Future.forEach(selectedItem.keys, (key) async {
                           final response = await http.post(
                             Uri.parse(smsUriPath),
@@ -168,17 +170,15 @@ class _ShareState extends State<InvitePage> {
                             },
                             body: json.encode({
                               'telephone': (key as Contact).phones.first.number,
-                              'smsMessage': AppLocalizations.of(context)
-                                  ?.inviteDescription,
+                              'smsMessage': appLocalizations?.inviteDescription,
                             }),
                           );
                           if (response.statusCode != 200) {
-                            notifyMsg =
-                                AppLocalizations.of(context)!.smsNotSent;
+                            notifyMsg = appLocalizations?.smsNotSent ?? "";
                           }
                         });
                         var snack = SnackBar(content: Text(notifyMsg));
-                        ScaffoldMessenger.of(context).showSnackBar(snack);
+                        scaffoldMessengerState?.showSnackBar(snack);
                       },
                       style: ElevatedButton.styleFrom(
                           primary: Colors.blue,
