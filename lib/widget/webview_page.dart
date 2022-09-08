@@ -147,7 +147,7 @@ class _WebviewState extends State<WebviewPage> {
                           if (uri?.scheme.startsWith("mailto") ?? false) {
                             if (uri != null) {
                               Share.share(
-                                  uri.queryParameters["body"].toString() ?? "",
+                                  uri.queryParameters["body"].toString(),
                                   subject: uri.queryParameters["subject"]
                                       .toString());
                               return NavigationActionPolicy.CANCEL;
