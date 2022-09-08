@@ -4,6 +4,8 @@ import 'package:cbsdinfo_isu_shop/widget/search_box.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:external_app_launcher/external_app_launcher.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -26,11 +28,13 @@ class _WebviewState extends State<WebviewPage> {
   InAppWebViewController? webViewController;
   InAppWebViewGroupOptions options = InAppWebViewGroupOptions(
       crossPlatform: InAppWebViewOptions(
-          useShouldOverrideUrlLoading: true,
-          mediaPlaybackRequiresUserGesture: false),
+        useShouldOverrideUrlLoading: true,
+        mediaPlaybackRequiresUserGesture: false,
+      ),
       android: AndroidInAppWebViewOptions(
-          useHybridComposition: true,
-          mixedContentMode: AndroidMixedContentMode.MIXED_CONTENT_ALWAYS_ALLOW),
+        useHybridComposition: true,
+        mixedContentMode: AndroidMixedContentMode.MIXED_CONTENT_ALWAYS_ALLOW,
+      ),
       ios: IOSInAppWebViewOptions(
         allowsInlineMediaPlayback: true,
       ));
@@ -103,6 +107,16 @@ class _WebviewState extends State<WebviewPage> {
                             isSecure: false,
                           );
                           webViewController = controller;
+                          controller.addJavaScriptHandler(
+                              handlerName: "launchMazuApp",
+                              callback: (args) {
+                                LaunchApp.openApp(
+                                  androidPackageName:
+                                      'com.keynovation.mazuaround',
+                                  iosUrlScheme: '',
+                                  appStoreLink: '',
+                                );
+                              });
                         },
                         onUpdateVisitedHistory:
                             (controller, url, androidIsReload) async {
@@ -133,11 +147,19 @@ class _WebviewState extends State<WebviewPage> {
                           if (uri?.scheme.startsWith("mailto") ?? false) {
                             if (uri != null) {
                               Share.share(
-                                  uri.queryParameters["body"].toString(),
+                                  uri.queryParameters["body"].toString() ?? "",
                                   subject: uri.queryParameters["subject"]
                                       .toString());
                               return NavigationActionPolicy.CANCEL;
                             }
+                          }
+                          if (uri?.scheme.startsWith("tel") ?? false) {
+                            if (uri != null) {
+                              await launchUrl(
+                                uri,
+                              );
+                            }
+                            return NavigationActionPolicy.CANCEL;
                           }
                           return NavigationActionPolicy.ALLOW;
                         },

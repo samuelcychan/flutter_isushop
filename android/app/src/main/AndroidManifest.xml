@@ -7,6 +7,9 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-feature android:name="android.hardware.location.gps" />
     <uses-feature android:name="android.hardware.location.network" />
+    <queries>
+        <package android:name="com.keynovation.mazuaround" />
+    </queries>
    <application
         android:label="愛嬉遊"
         android:name="${applicationName}"
