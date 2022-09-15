@@ -1,4 +1,4 @@
-name: cbsdinfo_isu_shop
+name: isushop
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -47,6 +47,8 @@ dependencies:
   flutter_math_fork: '>=0.6.0 <1.0.0'
   external_app_launcher: ^3.1.0
   url_launcher: ^6.1.5
+  flutter_launcher_icons: ^0.10.0
+  change_app_package_name: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -61,6 +63,12 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/launch.png"
+  min_sdk_android: 21
 
 # The following section is specific to Flutter packages.
 flutter:

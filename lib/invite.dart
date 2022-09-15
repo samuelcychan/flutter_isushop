@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:cbsdinfo_isu_shop/main.dart';
-import 'package:cbsdinfo_isu_shop/widget/bottom_nav.dart';
-import 'package:cbsdinfo_isu_shop/widget/search_box.dart';
+import 'package:isushop/main.dart';
+import 'package:isushop/widget/bottom_nav.dart';
+import 'package:isushop/widget/search_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

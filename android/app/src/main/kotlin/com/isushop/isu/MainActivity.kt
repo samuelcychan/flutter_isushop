@@ -1,4 +1,4 @@
-package com.example.cbsdinfo_isu_shop
+package com.isushop.isu
 
 import io.flutter.embedding.android.FlutterActivity
 

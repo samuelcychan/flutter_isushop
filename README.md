@@ -1,4 +1,4 @@
-# cbsdinfo_isu_shop
+# isushop
 
 A new Flutter project.
 

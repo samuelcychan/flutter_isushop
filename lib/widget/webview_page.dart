@@ -1,6 +1,6 @@
-import 'package:cbsdinfo_isu_shop/main.dart';
-import 'package:cbsdinfo_isu_shop/widget/bottom_nav.dart';
-import 'package:cbsdinfo_isu_shop/widget/search_box.dart';
+import 'package:isushop/main.dart';
+import 'package:isushop/widget/bottom_nav.dart';
+import 'package:isushop/widget/search_box.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -113,7 +113,7 @@ class _WebviewState extends State<WebviewPage> {
                                 LaunchApp.openApp(
                                   androidPackageName:
                                       'com.keynovation.mazuaround',
-                                  iosUrlScheme: '',
+                                  iosUrlScheme: 'mazuaround://',
                                   appStoreLink: '',
                                 );
                               });

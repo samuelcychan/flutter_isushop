@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,7 +28,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,40 +49,21 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyADoDK1Q9cCNQgh9yd8D1Zjm49-DzidRMA',
-    appId: '1:812221084773:web:0a43ff6605caffd624c28c',
-    messagingSenderId: '812221084773',
-    projectId: 'portal-isuapp',
-    authDomain: 'portal-isuapp.firebaseapp.com',
-    storageBucket: 'portal-isuapp.appspot.com',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAY0Av5wpArZ2fMHeS7FyUtDPEj2M-NcE0',
-    appId: '1:812221084773:android:0fcc433717234e8b24c28c',
-    messagingSenderId: '812221084773',
-    projectId: 'portal-isuapp',
-    storageBucket: 'portal-isuapp.appspot.com',
+    apiKey: 'AIzaSyAjYtFqGThOdZgsylE5qm-meyPLFfj0Sd8',
+    appId: '1:151465342526:android:d2429a4aea5281c7d4036f',
+    messagingSenderId: '151465342526',
+    projectId: 'mazuaround-c7ff0',
+    storageBucket: 'mazuaround-c7ff0.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBQGbBIAYvRtc217qubZe8O7uaOVdkffh4',
-    appId: '1:812221084773:ios:3a867c1e1a587c3b24c28c',
-    messagingSenderId: '812221084773',
-    projectId: 'portal-isuapp',
-    storageBucket: 'portal-isuapp.appspot.com',
-    iosClientId: '812221084773-60sm776mhvce61pohs1k72m7ujootu1e.apps.googleusercontent.com',
-    iosBundleId: 'com.csbd.portal.isuapp',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBQGbBIAYvRtc217qubZe8O7uaOVdkffh4',
-    appId: '1:812221084773:ios:3a867c1e1a587c3b24c28c',
-    messagingSenderId: '812221084773',
-    projectId: 'portal-isuapp',
-    storageBucket: 'portal-isuapp.appspot.com',
-    iosClientId: '812221084773-60sm776mhvce61pohs1k72m7ujootu1e.apps.googleusercontent.com',
-    iosBundleId: 'com.csbd.portal.isuapp',
+    apiKey: 'AIzaSyAwu4W5fA66qcpyUr9FKcK1pd71Udg6OS0',
+    appId: '1:151465342526:ios:d33be54b29dee722d4036f',
+    messagingSenderId: '151465342526',
+    projectId: 'mazuaround-c7ff0',
+    storageBucket: 'mazuaround-c7ff0.appspot.com',
+    iosClientId: '151465342526-uj30l7265j56b964uctmpdvq04aabfie.apps.googleusercontent.com',
+    iosBundleId: 'com.isushop.isu',
   );
 }
