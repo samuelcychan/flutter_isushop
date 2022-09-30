@@ -5,10 +5,12 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 class SearchBox extends StatelessWidget {
   SearchBox({
     Key? key,
+    required this.callback,
     required this.webviewController,
   }) : super(key: key);
 
   final textEditController = TextEditingController();
+  final VoidBoolCallback callback;
   final InAppWebViewController? webviewController;
 
   @override
@@ -33,6 +35,7 @@ class SearchBox extends StatelessWidget {
                   suffixIcon: IconButton(
                 icon: const Icon(Icons.search),
                 onPressed: () {
+                  callback(false);
                   if (ModalRoute.of(context)?.settings.name != "/") {
                     Navigator.of(context).pop();
                   }

@@ -114,7 +114,8 @@ class _WebviewState extends State<WebviewPage> {
                                   androidPackageName:
                                       'com.keynovation.mazuaround',
                                   iosUrlScheme: 'mazuaround://',
-                                  appStoreLink: '',
+                                  appStoreLink:
+                                      'https://apps.apple.com/us/app/媽祖環禱/id1642334332',
                                 );
                               });
                         },
@@ -167,6 +168,9 @@ class _WebviewState extends State<WebviewPage> {
                       Visibility(
                           visible: shouldShowSearchBar,
                           child: SearchBox(
+                            callback: (val) => setState(() {
+                              shouldShowSearchBar = val;
+                            }),
                             webviewController: webViewController,
                           )),
                     ],

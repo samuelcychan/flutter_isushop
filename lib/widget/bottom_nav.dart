@@ -38,6 +38,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
         setState(() {
           _currentIndex = index;
           if (index == 0) {
+            shouldShowSearchBar = false;
+            widget.callback(shouldShowSearchBar);
             // Navigator.of(context).pushNamed('/', arguments: {"path": "/"});
             if (ModalRoute.of(context)?.settings.name != "/" &&
                 ModalRoute.of(context)?.settings.name != "/webview") {
@@ -47,6 +49,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 ?.loadUrl(urlRequest: URLRequest(url: Uri.parse(baseUriPath)));
           }
           if (index == 1) {
+            shouldShowSearchBar = false;
+            widget.callback(shouldShowSearchBar);
             if (ModalRoute.of(context)?.settings.name != "/invite") {
               Navigator.push(
                   context,
@@ -89,6 +93,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
   }
 
   void showPopupMenu(BuildContext context) async {
+    shouldShowSearchBar = false;
+    widget.callback(shouldShowSearchBar);
     await showMenu(
       context: context,
       position: bottomNavigationPosition(context),

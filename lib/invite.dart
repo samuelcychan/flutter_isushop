@@ -191,6 +191,9 @@ class _ShareState extends State<InvitePage> {
           Visibility(
               visible: shouldShowSearchBar,
               child: SearchBox(
+                callback: (val) => setState(() {
+                  shouldShowSearchBar = val;
+                }),
                 webviewController: widget.controller,
               )),
         ],
