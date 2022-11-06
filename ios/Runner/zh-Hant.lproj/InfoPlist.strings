@@ -1,6 +1,7 @@
 "CFBundleDisplayName" = "愛嬉遊";
 "CFBundleName" = "愛嬉遊";
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "要查找附近的推薦，請允許訪問您的位置";
-"NSLocationAlwaysUsageDescription" = "要查找附近的推薦，請允許訪問您的位置";
-"NSLocationWhenInUseUsageDescription" = "要查找附近的推薦，請允許訪問您的位置";
-"NSCameraUsageDescription" = "要使用相機拍照，請允許使用相機";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "愛嬉遊會員系統會員好康推薦功能，需取用您的所在位置資訊";
+"NSLocationAlwaysUsageDescription" = "愛嬉遊會員系統會員好康推薦功能，需取用您的所在位置資訊";
+"NSLocationWhenInUseUsageDescription" = "愛嬉遊會員系統會員好康推薦功能，需取用您的所在位置資訊";
+"NSCameraUsageDescription" = "愛嬉遊會員系統更換大頭照功能，需取用您的相機功能";
+"NSContactsUsageDescription" = "愛嬉遊會員系統會員邀請功能，需取用您的通訊錄資訊";

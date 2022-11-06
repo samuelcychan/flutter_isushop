@@ -4,3 +4,4 @@
 "NSLocationAlwaysUsageDescription" = "To find nearby recommendation, please allow the access of your location";
 "NSLocationWhenInUseUsageDescription" = "To find nearby recommendation, please allow the access of your location";
 "NSCameraUsageDescription" = "To take a image with camera, please allow the permission of using camera";
+"NSContactsUsageDescription" = "Reason we need access to the contact list";
