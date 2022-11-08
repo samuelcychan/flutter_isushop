@@ -122,7 +122,8 @@ class _WebviewState extends State<WebviewPage> {
                         onUpdateVisitedHistory:
                             (controller, url, androidIsReload) async {
                           if (url.toString().contains("login") ||
-                              url.toString().contains("logout")) {
+                              url.toString().contains("logout") ||
+                              url.toString().contains("register")) {
                             shouldShowBottomNav = false;
                           } else {
                             shouldShowBottomNav = true;
