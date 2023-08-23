@@ -102,7 +102,7 @@ class _WebviewState extends State<WebviewPage> {
                             url: Uri.parse(baseUriPath),
                             name: "isHidden",
                             value: "1",
-                            domain: "portal.isu-shop.com",
+                            domain: "www.iseeyou.org.tw",
                             expiresDate: expiresDate,
                             isSecure: false,
                           );
@@ -131,7 +131,7 @@ class _WebviewState extends State<WebviewPage> {
                           shouldShowFAB = !checkIsuDomain(url.toString());
                           CookieManager manager = CookieManager.instance();
                           Cookie? cookie = await manager.getCookie(
-                              url: Uri.parse("https://portal.isu-shop.com/"),
+                              url: Uri.parse("https://www.iseeyou.org.tw/"),
                               name: "Authorization");
                           setState(() {
                             token = cookie?.value?.toString() ?? "";
@@ -178,15 +178,13 @@ class _WebviewState extends State<WebviewPage> {
                   ),
                 ),
               ]))),
-      bottomNavigationBar: (token?.isNotEmpty ?? false) && shouldShowBottomNav
-          ? BottomNavBar(
-              token: token,
-              callback: (val) => setState(() {
-                shouldShowSearchBar = val;
-              }),
-              controller: webViewController,
-            )
-          : null,
+      bottomNavigationBar: BottomNavBar(
+        token: token,
+        callback: (val) => setState(() {
+          shouldShowSearchBar = val;
+        }),
+        controller: webViewController,
+      ),
       floatingActionButton: (shouldShowFAB)
           ? Padding(
               padding: const EdgeInsets.only(top: 12.0),

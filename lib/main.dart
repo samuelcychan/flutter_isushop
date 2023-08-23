@@ -11,7 +11,7 @@ import 'firebase_options.dart';
 
 const ceruleanBlueColor = Color(0xFF2A52B8);
 const grayColor = Color(0xFF646464);
-const baseUriPath = "https://portal.isu-shop.com";
+const baseUriPath = "https://www.iseeyou.org.tw";
 const smsUriPath = "$baseUriPath/sys/api/Member/MemberRecommendSend";
 
 typedef VoidBoolCallback = void Function(bool val);
